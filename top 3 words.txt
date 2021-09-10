@@ -1,0 +1,52 @@
+#Top 3 Words
+#Finds the top 3 most commonly occuring words in a text, whilt removing any non-ASCII characters (excluding apostrophes)
+#Challenge taken from codewars.com
+#Callum Young 2021
+
+from collections import Counter 
+
+def regulariseWord(word): #Removes non-ASCII characters (except for apostrophes) from a word
+    newString = ""
+    letterCheck = False
+    for i in word:
+        if (123 > ord(i)>96) or ord(i)== 39:
+            newString += i
+        else:
+            newString += " " #In this challenge, characters that aren't letters or apostrophes also count as spaces.
+            #E.g hello;;world would contain the words 'hello' and 'world' - not just helloworld
+        if (123 > ord(i) >96): #Checks to make sure that the word doesn't solely contain apostrophes
+            letterCheck = True
+    if letterCheck == False:
+        return ""
+    else:
+        return newString
+        
+def resplitList(currentList): #Checks all elements in a list. If any elements have spaces, they are split and added to the new list separately
+    newList =[]
+    for i in range(len(currentList)):
+        tempList = currentList[i].split(" ")
+        for j in range(len(tempList)):
+            if tempList[j] != "":
+                newList.append(tempList[j]) 
+    return newList
+
+def top_3_words(text):
+    print(text)
+    text = text.lower() #The requirements don't take case sensitivity into account
+    text = text.replace("\n"," ") #Replace, as \n represents a space in some strings
+    textArray = text.split(" ")
+    newTextList= []
+    for i in range(len(textArray)): 
+        newWord = regulariseWord(textArray[i])
+        if newWord != "": #Means blank strings aren't counted as words
+            newTextList.append(newWord)
+    newTextList = resplitList(newTextList)
+    countList = list(Counter(newTextList).items()) 
+    countList.sort(key=lambda x: x[1],reverse=True) #Sorts the 2d array by the second index in each element.
+    print(countList)
+    finalList = []
+    for i in range(3):
+        if i>= len(countList): #The list could contain less than 3 words, so the loop is broken out of if this is the case
+            break
+        finalList.append(countList[i][0])
+    return finalList
