@@ -46,7 +46,6 @@ def top_3_words(text):
     :param text: the text that will be used to find the top 3 most common words
     :return: the 3 most commonly occuring words
     '''
-    print(text)
     text = text.lower() #The requirements don't take case sensitivity into account
     text = text.replace("\n"," ") #Replace, as \n represents a space in some strings
     textArray = text.split(" ")
@@ -58,7 +57,6 @@ def top_3_words(text):
     individualWordList = splitList(individualWordList)
     countedList = list(Counter(individualWordList).items()) 
     countedList.sort(key=lambda x: x[1],reverse=True) #Sorts the 2d array by the second index in each element.
-    print(countedList)
     top3wordList = []
     for i in range(3):
         if i>= len(countedList): #The list could contain less than 3 words, so the loop is broken out of if this is the case
