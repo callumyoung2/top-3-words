@@ -1,11 +1,16 @@
 #Top 3 Words
-#Finds the top 3 most commonly occuring words in a text, whilt removing any non-ASCII characters (excluding apostrophes)
+#Finds the top 3 most commonly occuring words in a text, whilst removing any non-ASCII characters (excluding apostrophes)
 #Challenge taken from codewars.com
 #Callum Young 2021
 
 from collections import Counter 
 
-def regulariseWord(word): #Removes non-ASCII characters (except for apostrophes) from a word
+def regulariseWord(word): 
+    '''
+    Removes non-ASCII characters (except for apostrophes) from a word
+    :param word: the word to be regularised
+    :return: the regularised word
+    '''
     regularisedWord = ""
     isCharacterValid = False
     for character in word:
@@ -21,7 +26,12 @@ def regulariseWord(word): #Removes non-ASCII characters (except for apostrophes)
     else:
         return regularisedWord
         
-def splitList(currentList): #Checks all elements in a list. If any elements have spaces, they are split and added to the new list separately
+def splitList(currentList):
+    '''
+    Checks all elements in a list. If any elements have spaces, they are split and added to the new list separately
+    :param currentList: the list that will be split
+    :return: the list with no spaces in any elements.
+    '''
     finalSplitList =[]
     for i in range(len(currentList)):
         tempSplitList = currentList[i].split(" ")
@@ -31,6 +41,11 @@ def splitList(currentList): #Checks all elements in a list. If any elements have
     return finalSplitList
 
 def top_3_words(text):
+    '''
+    Finds the top 3 most commonly occuring words in a text, whilst removing any non-ASCII characters (excluding apostrophes)
+    :param text: the text that will be used to find the top 3 most common words
+    :return: the 3 most commonly occuring words
+    '''
     print(text)
     text = text.lower() #The requirements don't take case sensitivity into account
     text = text.replace("\n"," ") #Replace, as \n represents a space in some strings
